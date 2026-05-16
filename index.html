@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
-    <title>Pixel Activator - Gerenciador de Eventos TikTok</title>
+    <title>Pixel Activator - TikTok Events (Parâmetros Completos)</title>
     <style>
         * {
             margin: 0;
@@ -19,11 +19,10 @@
         }
 
         .container {
-            max-width: 600px;
+            max-width: 650px;
             margin: 0 auto;
         }
 
-        /* Header */
         .header {
             text-align: center;
             margin-bottom: 24px;
@@ -44,7 +43,6 @@
             font-size: 0.85rem;
         }
 
-        /* Abas */
         .tabs {
             display: flex;
             gap: 8px;
@@ -74,7 +72,6 @@
             box-shadow: 0 4px 12px rgba(59,130,246,0.3);
         }
 
-        /* Cards */
         .card {
             background: rgba(15, 23, 42, 0.8);
             backdrop-filter: blur(12px);
@@ -96,7 +93,6 @@
             padding-left: 14px;
         }
 
-        /* Área do Pixel Code */
         .pixel-input-area {
             background: #0f172a;
             border-radius: 20px;
@@ -189,7 +185,6 @@
             color: #fca5a5;
         }
 
-        /* Eventos Grid */
         .events-grid {
             display: flex;
             flex-direction: column;
@@ -276,6 +271,17 @@
             border-top: 1px solid #334155;
         }
 
+        .params-preview {
+            background: #0f172a;
+            border-radius: 16px;
+            padding: 12px;
+            margin-top: 12px;
+            font-size: 0.7rem;
+            color: #94a3b8;
+            font-family: monospace;
+            border-left: 3px solid #3b82f6;
+        }
+
         .toast-msg {
             position: fixed;
             bottom: 25px;
@@ -313,24 +319,21 @@
 
 <div class="container">
     <div class="header">
-        <h1>🎯 Pixel Activator</h1>
-        <div class="sub">Configure seu TikTok Pixel e dispare eventos para ativação</div>
+        <h1>🎯 TikTok Pixel Activator</h1>
+        <div class="sub">Configuração completa com todos os parâmetros obrigatórios (content_id + value)</div>
     </div>
 
-    <!-- Abas -->
     <div class="tabs">
         <button class="tab-btn active" data-tab="config">🔧 Configurar Pixel</button>
         <button class="tab-btn" data-tab="events">📡 Disparar Eventos</button>
     </div>
 
-    <!-- Aba de Configuração do Pixel -->
+    <!-- Aba de Configuração -->
     <div id="tabConfig" class="tab-content">
         <div class="card">
-            <div class="section-title">
-                🆔 Código do TikTok Pixel
-            </div>
+            <div class="section-title">🆔 TikTok Pixel ID</div>
             <div class="pixel-input-area">
-                <label class="pixel-label">📌 Insira o Pixel ID (ex: D7FPCA3C77UAP94ROC70 ou código completo)</label>
+                <label class="pixel-label">📌 Insira o Pixel ID (ex: D7FPCA3C77UAP94ROC70)</label>
                 <div class="pixel-input-group">
                     <input type="text" id="pixelIdInput" class="pixel-input" placeholder="Ex: D7FPCA3C77UAP94ROC70" autocomplete="off">
                     <button id="savePixelBtn" class="btn-primary">🔗 Ativar Pixel</button>
@@ -338,64 +341,51 @@
                 <div id="pixelStatusArea" class="pixel-status status-inactive">
                     ⚠️ Nenhum pixel ativo. Insira o Pixel ID acima.
                 </div>
-                <div style="margin-top: 16px;">
-                    <details style="color: #94a3b8; font-size: 0.75rem;">
-                        <summary>ℹ️ Como obter meu Pixel ID?</summary>
-                        <p style="margin-top: 10px;">No TikTok Ads Manager vá em: <strong>Assets > Event Manager > Gerenciar Pixel</strong>. Copie o código que começa com "D" ou o ID numérico. Insira apenas o ID (ex: D7FPCA3C77UAP94ROC70).</p>
-                    </details>
+                <div class="params-preview">
+                    📋 <strong>Parâmetros incluídos em TODOS os eventos:</strong><br>
+                    • content_id (obrigatório para VSA) • value • currency (BRL) • content_type • content_name • event_id
                 </div>
             </div>
         </div>
-
         <div class="card">
-            <div class="section-title">
-                📋 Instruções Rápidas
-            </div>
+            <div class="section-title">📋 Instruções</div>
             <div style="color: #cbd5e6; font-size: 0.85rem; line-height: 1.5;">
-                <p>1️⃣ Cole seu <strong>Pixel ID</strong> no campo acima e clique em "Ativar Pixel".</p>
-                <p>2️⃣ O script do TikTok será carregado automaticamente no navegador.</p>
-                <p>3️⃣ Vá na aba <strong>"Disparar Eventos"</strong> e clique nos botões para enviar eventos padrão.</p>
-                <p style="margin-top: 12px;">✅ Os eventos ficam salvos no localStorage (não repetem). Use o botão "Resetar" para limpar e testar novamente.</p>
+                <p>1️⃣ Cole seu <strong>Pixel ID</strong> e clique em "Ativar Pixel".</p>
+                <p>2️⃣ Vá na aba <strong>"Disparar Eventos"</strong>.</p>
+                <p>3️⃣ Cada evento contém <strong>content_id + value + currency</strong> para não gerar erros de VSA/ROAS.</p>
+                <p>✅ Os eventos ficam salvos no localStorage (não repetem). Use reset para novos testes.</p>
             </div>
         </div>
     </div>
 
-    <!-- Aba de Disparo de Eventos -->
+    <!-- Aba de Eventos -->
     <div id="tabEvents" class="tab-content" style="display: none;">
         <div class="card">
-            <div class="section-title">
-                🚀 Eventos Padrão TikTok
-            </div>
+            <div class="section-title">🚀 Eventos Padrão (com parâmetros completos)</div>
             <div id="eventsGrid" class="events-grid">
-                <!-- Botões gerados dinamicamente -->
-                <div style="text-align: center; color: #64748b; padding: 30px;">
-                    ⏳ Aguardando configuração do Pixel...
-                </div>
+                <div style="text-align: center; color: #64748b; padding: 30px;">⏳ Aguardando configuração do Pixel...</div>
             </div>
-            
             <div class="reset-area">
-                <span id="trackerInfo" style="color:#94a3b8; font-size:0.75rem;">📊 Eventos enviados: 0/6</span>
+                <span id="trackerInfo" style="color:#94a3b8; font-size:0.75rem;">📊 Eventos enviados: 0/7</span>
                 <button id="resetEventsBtn" class="btn-secondary">🗑️ Resetar registros</button>
             </div>
         </div>
         <div class="card" style="background: #0f172a60;">
             <div style="font-size: 0.75rem; color: #5ee0fa; text-align: center;">
-                💡 Dica: Clique em cada evento para disparar ao TikTok. Use "Enviar Todos" para ativar vários de uma vez.
+                💡 <strong>Todos os eventos agora incluem content_id, value, currency</strong> — compatível com VSA e ROAS.
             </div>
         </div>
     </div>
-    <footer>
-        🔥 Os eventos são enviados apenas uma vez por navegador. Use reset para novos testes.
-    </footer>
+    <footer>🔥 Eventos incluem content_id (obrigatório VSA) + value (ROAS) + currency. Sem erros.</footer>
 </div>
 
 <div id="toastMsg" class="toast-msg">✨ Notificação</div>
 
 <script>
-    // ========== GERENCIAMENTO DE PIXEL (dinâmico) ==========
-    const STORAGE_PIXEL_ID = 'tiktok_pixel_id_v2';
-    const STORAGE_EVENTS_KEY = 'pixel_activation_events_log';
-    const VISITOR_KEY = 'pixel_visitor_id';
+    // ========== STORAGE KEYS ==========
+    const STORAGE_PIXEL_ID = 'tiktok_pixel_id_fixed_v2';
+    const STORAGE_EVENTS_KEY = 'pixel_events_complete_log';
+    const VISITOR_KEY = 'pixel_visitor_uuid';
 
     let currentPixelId = null;
     let pixelLoaded = false;
@@ -409,26 +399,21 @@
         return vid;
     }
 
-    // Carregar pixel dinamicamente
+    // Carregar TikTok Pixel
     function loadTikTokPixel(pixelId) {
         return new Promise((resolve, reject) => {
             if (!pixelId || pixelId.trim() === '') {
                 reject('ID do pixel vazio');
                 return;
             }
-            
-            // Remove script antigo se existir (para recarregar)
             const oldScript = document.querySelector('script[data-pixel-loader="true"]');
             if (oldScript) oldScript.remove();
             
-            // Limpar a var global ttq se existir, para reiniciar
             if (window.ttq) {
                 try { delete window.ttq; } catch(e) { window.ttq = undefined; }
             }
             
             const cleanId = pixelId.trim();
-            
-            // Injetar script do TikTok Pixel (carregamento padrão)
             const script = document.createElement('script');
             script.setAttribute('data-pixel-loader', 'true');
             script.innerHTML = `
@@ -441,39 +426,27 @@
             `;
             document.head.appendChild(script);
             
-            // Aguardar carregamento (verificar se ttq está disponível)
             let attempts = 0;
             const checkInterval = setInterval(() => {
                 if (typeof window.ttq !== 'undefined' && window.ttq && typeof window.ttq.track === 'function') {
                     clearInterval(checkInterval);
                     pixelLoaded = true;
-                    console.log(`✅ Pixel ${cleanId} carregado com sucesso`);
+                    console.log(`✅ Pixel ${cleanId} carregado`);
                     resolve(true);
-                } else if (attempts > 30) {
+                } else if (attempts > 40) {
                     clearInterval(checkInterval);
-                    reject('Timeout: Pixel não carregou');
+                    reject('Timeout');
                 }
                 attempts++;
             }, 200);
-            
-            setTimeout(() => {
-                if (typeof window.ttq !== 'undefined' && window.ttq.track) {
-                    // já resolvido
-                } else {
-                    // tentar forçar
-                    if (typeof window.ttq === 'undefined') window.ttq = { track: () => console.warn('fallback') };
-                }
-            }, 1000);
         });
     }
     
-    // salvar pixel no localStorage e ativar
     async function activatePixel(pixelId) {
         if (!pixelId || pixelId.trim() === '') {
             showToast('❌ Insira um Pixel ID válido', 2000);
             return false;
         }
-        
         showToast(`⏳ Carregando pixel: ${pixelId}...`, 1800);
         try {
             await loadTikTokPixel(pixelId);
@@ -481,7 +454,7 @@
             currentPixelId = pixelId.trim();
             updatePixelStatusUI(true, pixelId);
             showToast(`✅ Pixel ativado! ${pixelId}`, 2000);
-            renderEventButtons(); // renderiza os botões (agora com pixel ativo)
+            renderEventButtons();
             return true;
         } catch(err) {
             console.error(err);
@@ -496,14 +469,14 @@
         if (!statusDiv) return;
         if (active && pixelId) {
             statusDiv.className = 'pixel-status status-active';
-            statusDiv.innerHTML = `✅ Pixel ATIVO | ID: ${pixelId}<br><span style="font-size:0.7rem;">🎯 Pronto para disparar eventos na aba "Disparar Eventos"</span>`;
+            statusDiv.innerHTML = `✅ Pixel ATIVO | ID: ${pixelId}<br><span style="font-size:0.7rem;">🎯 Eventos com content_id + value prontos para disparar</span>`;
         } else {
             statusDiv.className = 'pixel-status status-inactive';
             statusDiv.innerHTML = `⚠️ Nenhum pixel ativo. Insira o Pixel ID acima e clique em "Ativar Pixel".`;
         }
     }
     
-    // ========== GERENCIADOR DE EVENTOS (localStorage único) ==========
+    // ========== GERENCIAMENTO DE EVENTOS ==========
     function isEventTracked(eventName) {
         const raw = localStorage.getItem(STORAGE_EVENTS_KEY);
         if (!raw) return false;
@@ -516,9 +489,7 @@
     function markEventTracked(eventName) {
         let raw = localStorage.getItem(STORAGE_EVENTS_KEY);
         let data = {};
-        if (raw) {
-            try { data = JSON.parse(raw); } catch(e) {}
-        }
+        if (raw) { try { data = JSON.parse(raw); } catch(e) {} }
         data[eventName] = true;
         data.lastUpdated = Date.now();
         data.visitor = getVisitorId();
@@ -530,41 +501,35 @@
         localStorage.removeItem(STORAGE_EVENTS_KEY);
         updateTrackerCounter();
         renderEventButtons();
-        showToast('🧹 Todos os registros de eventos foram resetados!', 1800);
+        showToast('🧹 Todos os registros resetados! Eventos podem ser reenviados.', 1800);
     }
     
     function updateTrackerCounter() {
-        const events = ['ViewContent', 'AddToCart', 'InitiateCheckout', 'AddPaymentInfo', 'CompletePayment', 'Purchase'];
+        const events = ['ViewContent', 'AddToCart', 'InitiateCheckout', 'AddPaymentInfo', 'CompletePayment', 'Purchase', 'LandingPageView'];
         let count = events.filter(ev => isEventTracked(ev)).length;
         const trackerSpan = document.getElementById('trackerInfo');
         if (trackerSpan) trackerSpan.innerText = `📊 Eventos enviados: ${count}/${events.length}`;
-        // também atualiza status dos botões se renderizados
-        if (document.getElementById('eventsGrid')) {
-            // se os botões existem, atualiza UI
-            const btns = events.forEach(ev => {
-                const statusSpan = document.getElementById(`status-${ev}`);
-                if (statusSpan) {
-                    const tracked = isEventTracked(ev);
-                    statusSpan.innerHTML = tracked ? '✅ enviado' : '⏳ pendente';
-                    statusSpan.style.color = tracked ? '#4ade80' : '#facc15';
-                    const btnDiv = document.getElementById(`btn-${ev}`);
-                    if (btnDiv) {
-                        if (tracked) btnDiv.style.opacity = '0.7';
-                        else btnDiv.style.opacity = '1';
-                    }
-                }
-            });
-        }
+        
+        events.forEach(ev => {
+            const statusSpan = document.getElementById(`status-${ev}`);
+            if (statusSpan) {
+                const tracked = isEventTracked(ev);
+                statusSpan.innerHTML = tracked ? '✅ enviado' : '⏳ pendente';
+                statusSpan.style.color = tracked ? '#4ade80' : '#facc15';
+                const btnDiv = document.getElementById(`btn-${ev}`);
+                if (btnDiv) btnDiv.style.opacity = tracked ? '0.7' : '1';
+            }
+        });
     }
     
     function generateEventId(evName) {
         return `${evName}_${Date.now()}_${Math.random().toString(36).substr(2, 8)}`;
     }
     
-    function dispatchEventToTikTok(eventName) {
+    // ========== FUNÇÃO PRINCIPAL DISPARO - COM TODOS OS PARÂMETROS OBRIGATÓRIOS ==========
+    function dispatchEventToTikTok(eventName, customParams = {}) {
         if (!pixelLoaded && currentPixelId) {
-            // tentar recarregar pixel se necessário
-            showToast('⚠️ Pixel ainda não terminou carregamento, tente novamente em 2s', 1500);
+            showToast('⚠️ Pixel ainda carregando, tente novamente em 2s', 1500);
             return false;
         }
         if (typeof ttq === 'undefined' || !ttq.track) {
@@ -573,26 +538,107 @@
         }
         
         if (isEventTracked(eventName)) {
-            showToast(`⏭️ ${eventName} já foi enviado anteriormente (use reset)`, 1600);
+            showToast(`⏭️ ${eventName} já foi enviado (use reset)`, 1600);
             return false;
         }
         
         const eventId = generateEventId(eventName);
-        let params = { event_id: eventId, content_type: "product", currency: "BRL" };
         
+        // BASE OBRIGATÓRIA PARA TODOS OS EVENTOS (inclui content_id, value, currency)
+        // Gerando content_id único por evento para evitar warning de VSA
+        const baseParams = {
+            event_id: eventId,
+            content_type: "product",
+            content_id: `${eventName.toLowerCase()}_sku_${Date.now()}_${Math.floor(Math.random()*10000)}`, // ✅ content_id obrigatório
+            value: 0, // será sobrescrito por evento, mas garantido
+            currency: "BRL",
+            content_name: ""
+        };
+        
+        // Parâmetros específicos por evento (todos com value e content_id preenchidos)
+        let specific = {};
         switch(eventName) {
-            case 'ViewContent': params = { ...params, content_name: "Página Ativadora", content_id: "activator_page" }; break;
-            case 'AddToCart': params = { ...params, content_name: "Produto Teste", quantity: 1, value: 59.90 }; break;
-            case 'InitiateCheckout': params = { ...params, value: 129.90, num_items: 2 }; break;
-            case 'AddPaymentInfo': params = { ...params, payment_method: "credit_card", value: 129.90 }; break;
-            case 'CompletePayment': params = { ...params, transaction_id: `TXN_${Date.now()}`, value: 129.90 }; break;
-            case 'Purchase': params = { ...params, value: 149.90, content_name: "Pedido Ativação" }; break;
+            case 'ViewContent':
+                specific = {
+                    content_name: "Página de Produto - Camiseta Premium",
+                    content_id: "prod_camiseta_12345",
+                    value: 89.90,
+                    description: "Visualização de produto para VSA"
+                };
+                break;
+            case 'LandingPageView':
+                specific = {
+                    content_name: "Landing Page - Oferta Principal",
+                    content_id: "lp_oferta_001",
+                    value: 0.01, // landing page view tem valor simbólico para ROAS
+                    description: "Visualização de página de destino"
+                };
+                break;
+            case 'AddToCart':
+                specific = {
+                    content_name: "Camiseta Design Exclusivo",
+                    content_id: "sku_CAM001",
+                    quantity: 1,
+                    value: 89.90,
+                    price: 89.90
+                };
+                break;
+            case 'InitiateCheckout':
+                specific = {
+                    content_name: "Checkout - Carrinho de Compras",
+                    content_id: "checkout_session_abc123",
+                    num_items: 2,
+                    value: 179.80,
+                    currency: "BRL"
+                };
+                break;
+            case 'AddPaymentInfo':
+                specific = {
+                    content_name: "Pagamento - Cartão de Crédito",
+                    content_id: "payment_method_credit",
+                    payment_method: "credit_card",
+                    value: 179.80,
+                    currency: "BRL"
+                };
+                break;
+            case 'CompletePayment':
+                specific = {
+                    content_name: "Transação Finalizada com Sucesso",
+                    content_id: `order_${Date.now()}`,
+                    transaction_id: `TXN_${Date.now()}_${Math.random().toString(36).substr(2, 6)}`,
+                    value: 179.80,
+                    currency: "BRL",
+                    status: "completed"
+                };
+                break;
+            case 'Purchase':
+                specific = {
+                    content_name: "Compra Aprovada - Pedido Ativação",
+                    content_id: `purchase_order_${Date.now()}`,
+                    transaction_id: `PURCHASE_${Date.now()}`,
+                    value: 179.80,
+                    currency: "BRL",
+                    num_items: 2,
+                    content_type: "product"
+                };
+                break;
+            default:
+                specific = { content_name: `Evento ${eventName}`, value: 10.00, content_id: `generic_${eventName}` };
         }
         
-        console.log(`📡 Disparando ${eventName} para TikTok Pixel (${currentPixelId})`);
-        ttq.track(eventName, params);
+        // Merge final: base + específico
+        const finalParams = { ...baseParams, ...specific };
+        // Garantir que content_id NÃO fique vazio
+        if (!finalParams.content_id || finalParams.content_id === "") {
+            finalParams.content_id = `${eventName}_content_${Date.now()}`;
+        }
+        // Garantir que value seja number
+        if (typeof finalParams.value !== 'number') finalParams.value = parseFloat(finalParams.value) || 0.01;
+        
+        console.log(`📡 Disparando ${eventName} com parâmetros completos:`, finalParams);
+        ttq.track(eventName, finalParams);
         markEventTracked(eventName);
-        showToast(`✅ ${eventName} enviado com sucesso!`, 1700);
+        showToast(`✅ ${eventName} enviado (content_id: ${finalParams.content_id}, value: ${finalParams.value})`, 2200);
         return true;
     }
     
@@ -601,21 +647,21 @@
             showToast('Aguarde o pixel carregar completamente', 1500);
             return;
         }
-        const allEvents = ['ViewContent', 'AddToCart', 'InitiateCheckout', 'AddPaymentInfo', 'CompletePayment', 'Purchase'];
+        const allEvents = ['ViewContent', 'LandingPageView', 'AddToCart', 'InitiateCheckout', 'AddPaymentInfo', 'CompletePayment', 'Purchase'];
         const pending = allEvents.filter(ev => !isEventTracked(ev));
         if (pending.length === 0) {
             showToast('🎉 Todos os eventos já foram enviados! Use reset.', 1800);
             return;
         }
-        showToast(`🚀 Enviando ${pending.length} eventos...`, 1500);
+        showToast(`🚀 Enviando ${pending.length} eventos (todos com content_id + value)...`, 1800);
         for (let i=0; i<pending.length; i++) {
-            await new Promise(r => setTimeout(r, 400));
+            await new Promise(r => setTimeout(r, 500));
             dispatchEventToTikTok(pending[i]);
         }
-        showToast(`✨ ${pending.length} eventos disparados!`, 2000);
+        showToast(`✨ ${pending.length} eventos disparados com parâmetros corretos!`, 2200);
     }
     
-    // Renderizar botões na aba de eventos
+    // Renderizar botões (incluindo LandingPageView e todos)
     function renderEventButtons() {
         const grid = document.getElementById('eventsGrid');
         if (!grid) return;
@@ -628,12 +674,13 @@
         }
         
         const eventsList = [
-            { name: 'ViewContent', icon: '👁️', label: 'View Content' },
-            { name: 'AddToCart', icon: '🛒', label: 'Add to Cart' },
-            { name: 'InitiateCheckout', icon: '💳', label: 'Initiate Checkout' },
-            { name: 'AddPaymentInfo', icon: '💵', label: 'Add Payment Info' },
-            { name: 'CompletePayment', icon: '✅', label: 'Complete Payment' },
-            { name: 'Purchase', icon: '🏷️', label: 'Purchase' }
+            { name: 'ViewContent', icon: '👁️', label: 'View Content', desc: 'content_id + value' },
+            { name: 'LandingPageView', icon: '🌐', label: 'Landing Page View', desc: 'content_id + value' },
+            { name: 'AddToCart', icon: '🛒', label: 'Add to Cart', desc: 'content_id + value + price' },
+            { name: 'InitiateCheckout', icon: '💳', label: 'Initiate Checkout', desc: 'content_id + value' },
+            { name: 'AddPaymentInfo', icon: '💵', label: 'Add Payment Info', desc: 'content_id + value' },
+            { name: 'CompletePayment', icon: '✅', label: 'Complete Payment', desc: 'content_id + value + transaction_id' },
+            { name: 'Purchase', icon: '🏷️', label: 'Purchase', desc: 'content_id + value + transaction_id' }
         ];
         
         grid.innerHTML = '';
@@ -649,10 +696,11 @@
                     <div>
                         <div class="event-name">${ev.label}</div>
                         <span class="event-status" id="status-${ev.name}">${tracked ? '✅ enviado' : '⏳ pendente'}</span>
+                        <div style="font-size:0.6rem; color:#5ee0fa;">${ev.desc}</div>
                     </div>
                 </div>
                 <div class="trigger-badge" style="background: ${tracked ? '#2d3748' : '#3b82f6'}">
-                    ${tracked ? 'JÁ ENVIADO' : 'DISPARAR'}
+                    ${tracked ? 'ENVIADO' : 'DISPARAR'}
                 </div>
             `;
             if (!tracked) {
@@ -663,7 +711,7 @@
             grid.appendChild(btnDiv);
         });
         
-        // botão enviar todos
+        // Botão enviar todos
         const allBtn = document.createElement('div');
         allBtn.className = 'event-btn enviar-todos';
         allBtn.style.marginTop = '14px';
@@ -672,7 +720,7 @@
                 <div class="event-icon">⚡</div>
                 <div>
                     <div class="event-name">Enviar Todos Eventos Padrão</div>
-                    <span class="event-status">(apenas pendentes)</span>
+                    <span class="event-status">(content_id + value incluso)</span>
                 </div>
             </div>
             <div class="trigger-badge">🚀 ENVIAR LOTE</div>
@@ -682,7 +730,7 @@
         updateTrackerCounter();
     }
     
-    // Mostrar toast
+    // Toast
     let toastTimeout;
     function showToast(msg, duration=1800) {
         const toast = document.getElementById('toastMsg');
@@ -707,7 +755,7 @@
         } else {
             tabConfig.style.display = 'none';
             tabEvents.style.display = 'block';
-            renderEventButtons(); // re-renderiza ao abrir eventos
+            renderEventButtons();
         }
         document.querySelectorAll('.tab-btn').forEach(btn => {
             btn.classList.remove('active');
@@ -718,7 +766,7 @@
         });
     }
     
-    // Inicialização: carregar pixel salvo anteriormente
+    // Inicialização
     async function init() {
         const savedPixel = localStorage.getItem(STORAGE_PIXEL_ID);
         if (savedPixel && savedPixel.trim() !== '') {
@@ -728,9 +776,7 @@
             updatePixelStatusUI(false, null);
         }
         
-        const resetBtn = document.getElementById('resetEventsBtn');
-        if (resetBtn) resetBtn.addEventListener('click', () => resetAllEvents());
-        
+        document.getElementById('resetEventsBtn').addEventListener('click', () => resetAllEvents());
         document.getElementById('savePixelBtn').addEventListener('click', async () => {
             const pixelInput = document.getElementById('pixelIdInput').value.trim();
             if (pixelInput) await activatePixel(pixelInput);
